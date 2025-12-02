@@ -1,0 +1,325 @@
+/* ================================================================= */
+/* ANDROMEDA, BY DUCKTAPEKILLER */
+/* ================================================================= */
+
+/* ================================================================= */
+/* 0. VARIABLES & PALETTE */
+/* ================================================================= */
+:root {
+  /* --- TYPOGRAPHY --- */
+  --font-text-theme: 'Lora', 'Merriweather', 'Georgia', serif;
+  --font-ui-theme: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --line-height-normal: 1.7;
+
+  /* --- SHAPES & MOTION --- */
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --transition-pop: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
+
+  /* --- LIGHT MODE: OLD PAPER & DEEP INK --- */
+  --z-light-bg:           #EBE9E1; /* Oatmeal / Old Paper */
+  --z-light-surface:      #E1DED5; 
+  --z-light-surface-alt:  #D6D3C9; 
+  --z-light-border:       rgba(0, 0, 0, 0.1); 
+  
+  --z-light-text-main:    #151515; /* Ink Black */
+  --z-light-text-muted:   #404040; /* Charcoal */
+  --z-light-text-faint:   #666666; 
+  
+  /* Accent: Deep Green Ink */
+  --z-light-accent:       #2A4530; 
+  --z-light-on-accent:    #EBE9E1; /* Light Text on Dark Accent */
+  
+  --z-light-selection:    rgba(42, 69, 48, 0.15);
+  
+  /* Dust Color: Dark Grey, low opacity */
+  --z-light-pattern:      rgba(0, 0, 0, 0.12); 
+  --z-light-shadow-pop:   rgba(42, 69, 48, 0.25); 
+
+  /* Header Palette (Deep Earth Tones) */
+  --z-light-h1: #1B2E1F; 
+  --z-light-h2: #703B2B; 
+  --z-light-h3: #34455C; 
+  --z-light-h4: #5C4F22; 
+  --z-light-h5: #4F4354; 
+  --z-light-h6: #444444; 
+
+  /* --- DARK MODE: DEEP SPACE --- */
+  --z-dark-bg:            #242322;
+  --z-dark-surface:       #2C2A29;
+  --z-dark-surface-alt:   #363432;
+  --z-dark-border:        rgba(255, 255, 255, 0.05);
+  
+  --z-dark-text-main:     #E0DCD6;
+  --z-dark-text-muted:    #999590;
+  
+  /* Accent: Teal */
+  --z-dark-accent:        #6B9AA1;
+  --z-dark-on-accent:     #FFFFFF;
+
+  --z-dark-selection:     rgba(107, 154, 161, 0.2);
+  
+  /* Dust Color: White, low opacity */
+  --z-dark-pattern:       rgba(255, 255, 255, 0.15); 
+  --z-dark-shadow-pop:    rgba(107, 154, 161, 0.4);
+
+  /* Dark Header Palette */
+  --z-dark-h1: #6B9AA1; 
+  --z-dark-h2: #C88D94; 
+  --z-dark-h3: #8DA1C8; 
+  --z-dark-h4: #C8B88D; 
+  --z-dark-h5: #8DC8A6; 
+  --z-dark-h6: #9E9E9E; 
+}
+
+/* ================================================================= */
+/* 1. MAPPING VARIABLES */
+/* ================================================================= */
+.theme-light {
+  --background-primary: var(--z-light-bg) !important;
+  --background-primary-alt: var(--z-light-surface) !important;
+  --background-secondary: var(--z-light-surface) !important;
+  --background-secondary-alt: var(--z-light-surface-alt) !important;
+  --background-modifier-border: var(--z-light-border) !important;
+  --text-normal: var(--z-light-text-main);
+  --text-muted: var(--z-light-text-muted);
+  --text-faint: var(--z-light-text-faint);
+  
+  --interactive-accent: var(--z-light-accent);
+  --text-accent: var(--z-light-accent);
+  --text-on-accent: var(--z-light-on-accent) !important;
+  
+  --pattern-color: var(--z-light-pattern);
+  --pop-shadow: var(--z-light-shadow-pop);
+  
+  --h1-color: var(--z-light-h1);
+  --h2-color: var(--z-light-h2);
+  --h3-color: var(--z-light-h3);
+  --h4-color: var(--z-light-h4);
+  --h5-color: var(--z-light-h5);
+  --h6-color: var(--z-light-h6);
+}
+
+.theme-dark {
+  --background-primary: var(--z-dark-bg) !important;
+  --background-primary-alt: var(--z-dark-surface) !important;
+  --background-secondary: var(--z-dark-surface) !important;
+  --background-secondary-alt: var(--z-dark-surface-alt) !important;
+  --background-modifier-border: var(--z-dark-border) !important;
+  --text-normal: var(--z-dark-text-main);
+  --text-muted: var(--z-dark-text-muted);
+  
+  --interactive-accent: var(--z-dark-accent);
+  --text-accent: var(--z-dark-accent);
+  --text-on-accent: var(--z-dark-on-accent) !important;
+  
+  --pattern-color: var(--z-dark-pattern);
+  --pop-shadow: var(--z-dark-shadow-pop);
+
+  --h1-color: var(--z-dark-h1);
+  --h2-color: var(--z-dark-h2);
+  --h3-color: var(--z-dark-h3);
+  --h4-color: var(--z-dark-h4);
+  --h5-color: var(--z-dark-h5);
+  --h6-color: var(--z-dark-h6);
+}
+
+/* ================================================================= */
+/* 2. BACKGROUND PATTERN (SCATTERED DUST) */
+/* ================================================================= */
+/* We target the entire Left Split area, not just the file nav */
+.workspace-split.mod-left-split,
+.workspace-ribbon.mod-left,
+.workspace-split.mod-right-split {
+    background-color: var(--background-secondary) !important;
+    
+    /* Layered Gradients to create "Random" Dust */
+    background-image: 
+        radial-gradient(var(--pattern-color) 1px, transparent 1px),
+        radial-gradient(var(--pattern-color) 1px, transparent 1px),
+        radial-gradient(var(--pattern-color) 1.5px, transparent 1.5px) !important;
+        
+    /* Offset positions to break the grid look */
+    background-position: 
+        0 0, 
+        15px 15px, 
+        32px 7px !important;
+        
+    /* Small tile size to create abundance */
+    background-size: 40px 40px !important;
+}
+
+/* Ensure child elements don't hide the background */
+.nav-header, .nav-container, .workspace-leaf, .workspace-tab-container {
+    background: transparent !important;
+}
+
+/* Remove borders so dust flows continuously */
+.workspace-ribbon.mod-left, .workspace-split.mod-left-split, .workspace-split.mod-right-split {
+    border-right: none !important;
+    border-left: none !important;
+}
+
+/* ================================================================= */
+/* 3. FOLDER ICONS (Ensō Dot System) */
+/* ================================================================= */
+.nav-folder .collapse-icon svg { display: none !important; }
+
+.nav-folder .collapse-icon {
+    mask: none !important;
+    -webkit-mask: none !important;
+    background: transparent !important;
+    width: 18px !important; 
+    height: 18px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1 !important;
+    transform: none !important; 
+}
+
+/* The Dot */
+.nav-folder .collapse-icon::after {
+    content: '';
+    display: block;
+    width: 6px; 
+    height: 6px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+/* Open State */
+.nav-folder:not(.is-collapsed) > .nav-folder-title .collapse-icon::after {
+    background-color: var(--interactive-accent);
+    border-color: var(--interactive-accent);
+    transform: scale(1.1);
+}
+
+.nav-folder-title:hover .collapse-icon::after { border-color: var(--text-normal); }
+
+/* ================================================================= */
+/* 4. BUTTONS & INTERACTIVITY (Gentle Pop) */
+/* ================================================================= */
+.clickable-icon, 
+button, 
+.nav-action-button,
+.workspace-tab-header {
+    border-radius: var(--radius-m) !important;
+    transition: var(--transition-pop) !important;
+    border: 1px solid transparent !important;
+}
+
+/* HOVER STATE: The Pop */
+.clickable-icon:hover, 
+button:hover, 
+.nav-action-button:hover {
+    transform: translateY(-3px) scale(1.02); 
+    background-color: var(--background-primary) !important;
+    color: var(--text-normal) !important;
+    box-shadow: 0px 5px 12px var(--pop-shadow) !important;
+}
+
+.clickable-icon:hover { border-color: transparent !important; }
+
+.clickable-icon:active, button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: none !important;
+}
+
+/* ================================================================= */
+/* 5. TYPOGRAPHY & HEADERS (Readability Fixes) */
+/* ================================================================= */
+body { font-family: var(--font-ui-theme); }
+
+.markdown-source-view.mod-cm6 .cm-scroller, .markdown-preview-view {
+    font-family: var(--font-text-theme) !important;
+    padding: 30px 50px !important;
+}
+
+/* Explicit Link Styling */
+a, .cm-link, .cm-hmd-internal-link, .external-link {
+    color: var(--interactive-accent) !important; 
+    text-decoration: none !important;
+    font-weight: 600; /* Bolder for visibility */
+    opacity: 1 !important;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+a:hover, .cm-link:hover, .external-link:hover {
+    border-bottom-color: var(--interactive-accent);
+    filter: brightness(0.8); 
+}
+
+/* Headers */
+h1 { color: var(--h1-color) !important; font-weight: 300 !important; font-size: 2.2em !important; letter-spacing: -1px; margin-top: 1.5em !important; }
+h2 { color: var(--h2-color) !important; font-family: var(--font-ui-theme); margin-top: 1.5em !important; }
+h3 { color: var(--h3-color) !important; font-family: var(--font-ui-theme); margin-top: 1.5em !important; }
+h4 { color: var(--h4-color) !important; font-family: var(--font-ui-theme); margin-top: 1.5em !important; }
+h5 { color: var(--h5-color) !important; font-family: var(--font-ui-theme); margin-top: 1.5em !important; }
+h6 { color: var(--h6-color) !important; font-family: var(--font-ui-theme); margin-top: 1.5em !important; }
+
+/* ================================================================= */
+/* 6. SETTINGS & CONTROLS CONTRAST FIX */
+/* ================================================================= */
+
+/* Settings active side-tab */
+.vertical-tab-header-item.is-active {
+    background-color: var(--interactive-accent) !important;
+    color: var(--text-on-accent) !important;
+    font-weight: bold;
+}
+
+/* Primary Buttons (CTA) */
+button.mod-cta {
+    background-color: var(--interactive-accent) !important;
+    color: var(--text-on-accent) !important;
+}
+button.mod-cta:hover {
+    background-color: var(--interactive-accent) !important;
+    filter: brightness(0.9);
+    color: var(--text-on-accent) !important;
+}
+
+/* Toggle Switches Active State */
+.checkbox-container.is-enabled {
+    background-color: var(--interactive-accent) !important;
+}
+.checkbox-container.is-enabled:after {
+    background-color: var(--text-on-accent) !important;
+}
+
+/* Dropdown Selected Items */
+.dropdown:hover, .dropdown:focus {
+    background-color: var(--background-secondary-alt);
+    color: var(--text-normal);
+}
+
+/* Tabs Active State */
+.workspace-tab-header.is-active {
+    background: var(--background-primary) !important;
+    font-weight: bold;
+    color: var(--h1-color) !important;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.02);
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    border-radius: 50%;
+    width: 16px; height: 16px;
+    border: 1px solid var(--text-muted);
+    transition: var(--transition-pop);
+}
+input[type="checkbox"]:checked {
+    background-color: var(--interactive-accent);
+    border-color: transparent;
+    box-shadow: 0px 2px 6px var(--pop-shadow);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background-color: rgba(127,127,127,0.3); border-radius: 10px; }
