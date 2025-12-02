@@ -27,4 +27,4 @@ Andromeda is a calm, stellar-inspired theme for Obsidian. It combines a 'Scatter
 
 ## License
 
-[Insert License Here]
+MIT License
